@@ -37,8 +37,7 @@ namespace Midi.Event
 		
 		public override string ToString ()
 		{
-			return "MetaEvent(" + base.ToString() + ", meta_event_type: " + meta_event_type + ", length: " + length + ", data: " + data + ")";
+			return "MetaEvent(" + base.ToString () + ", meta_event_type: " + meta_event_type + ", length: " + length + ", data: " + data + ")";
 		}
 	}
 }
-

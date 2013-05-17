@@ -19,12 +19,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-
 using System.Linq;
 using FileStream = System.IO.FileStream;
 using BinaryReader = System.IO.BinaryReader;
 using BitConverter = System.BitConverter;
-using Tracks = System.Collections.Generic.IEnumerable<Midi.TrackChunk>;
+using Tracks = System.Collections.Generic.List<Midi.TrackChunk>;
 using StringEncoder = System.Text.UTF7Encoding;
 using TrackData = System.Collections.Generic.Dictionary<string, object>;
 
@@ -46,29 +45,17 @@ namespace Midi
 				header_chunk = new HeaderChunk (header_chunk_ID, header_chunk_size, header_chunk_data);
 			}
 
-			//Tracks tracks =
 			Tracks tracks =
 				Enumerable.Range (0, header_chunk.number_of_tracks)
 				.Select (track_number => {
-					string track_chunk_ID = stringEncoder.GetString (input_binary_reader.ReadBytes (4));
-					int track_chunk_size = BitConverter.ToInt32 (input_binary_reader.ReadBytes (4).Reverse ().ToArray<byte> (), 0);
-					byte[] track_chunk_data = input_binary_reader.ReadBytes (track_chunk_size);
+				string track_chunk_ID = stringEncoder.GetString (input_binary_reader.ReadBytes (4));
+				int track_chunk_size = BitConverter.ToInt32 (input_binary_reader.ReadBytes (4).Reverse ().ToArray<byte> (), 0);
+				byte[] track_chunk_data = input_binary_reader.ReadBytes (track_chunk_size);
 
-					//return new TrackChunk (track_chunk_ID, track_chunk_size, track_chunk_data);
-					TrackData t_data = new TrackData ();
-					t_data ["track_chunk_ID"] = track_chunk_ID;
-					t_data ["track_chunk_size"] = track_chunk_size;
-					t_data ["track_chunk_data"] = track_chunk_data;
-
-					return t_data;
-				}).ToList ()
-				.Select (t_data => new TrackChunk ((string)t_data ["track_chunk_ID"], (int)t_data ["track_chunk_size"], (byte[])t_data ["track_chunk_data"]));
-
-			//Tracks tracks = track_data.AsParallel().Select (t_data => new TrackChunk ());
-			//Tracks tracks = track_data.Select (t_data => new TrackChunk ((string)t_data ["track_chunk_ID"], (int)t_data ["track_chunk_size"], (byte[])t_data ["track_chunk_data"]));
+				return new TrackChunk (track_chunk_ID, track_chunk_size, track_chunk_data);
+			}).ToList ();
 
 			return new MidiFile (header_chunk, tracks);
 		}
 	}
 }
-

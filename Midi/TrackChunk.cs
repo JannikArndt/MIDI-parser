@@ -19,7 +19,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-
 using System.Linq;
 using TrackEvents = System.Collections.Generic.List<Midi.Event.MidiEvent>;
 using StringEncoder = System.Text.UTF7Encoding;
@@ -34,23 +33,44 @@ namespace Midi
 {
 	public class TrackChunk : Chunk
 	{
-		public readonly TrackEvents events = new TrackEvents ();
-		private static readonly StringEncoder stringEncoder = new StringEncoder ();
+		private readonly byte[] track_data;
+		// Lazy loading of the events list
+		private TrackEvents _events = null;
+
+		public TrackEvents events {
+			get {
+				switch (_events == null) {
+				case true:
+					_events = parse_events (this.chunk_size, this.track_data);
+					return _events;
+				default:
+					return _events;
+				}
+			}
+			private set {}
+		}
 
 		public TrackChunk (string chunk_ID, int chunk_size, byte[] track_data) : base(chunk_ID, chunk_size)
 		{
+			this.track_data = track_data;
+		}
+
+		private static TrackEvents parse_events (int chunk_size, byte[] track_data)
+		{
+			TrackEvents events = new TrackEvents ();
+			StringEncoder stringEncoder = new StringEncoder ();
 
 			int i = 0;
 			ByteList delta_time_bytes = new ByteList ();
 			while (i < chunk_size) {
 				delta_time_bytes.Add (track_data [i]);
-
+				
 				switch (track_data [i] == 0x00) {
-
+					
 				// End of delta time reached
 				case true:
 					i += 1;
-
+					
 					byte event_type_value = track_data [i];
 					int delta_time = 0;
 					try {
@@ -58,10 +78,10 @@ namespace Midi
 					} catch (ArgumentException e) {
 						delta_time = 0;
 					}
-
+					
 					// MIDI Channel Events
 					if ((event_type_value & 0xF0) < 0xF0) {
-
+						
 						byte midi_channel = (byte)(event_type_value & 0x0F);
 						i += 1;
 						byte parameter_1 = track_data [i];
@@ -88,11 +108,11 @@ namespace Midi
 					}
 					// System Exclusive Events
 					else if (event_type_value == 0xF0) {
-						System.Console.Out.WriteLine ("System Exclusive Events");
+						throw new ArgumentException ("System Exclusive Events not yet supported");
 					}
 					
 					i += 1;
-
+					
 					delta_time_bytes = new ByteList ();
 					break;
 				// End of delta time not yet reached
@@ -101,6 +121,8 @@ namespace Midi
 					break;
 				}
 			}
+
+			return events;
 		}
 		
 		override public string ToString ()
@@ -109,4 +131,3 @@ namespace Midi
 		}
 	}
 }
-

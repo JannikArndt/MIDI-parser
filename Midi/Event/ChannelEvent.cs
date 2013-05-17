@@ -37,8 +37,7 @@ namespace Midi.Event
 		
 		public override string ToString ()
 		{
-			return "ChannelEvent(" + base.ToString() + ", midi_channel: " + midi_channel + ", parameter_1: " + parameter_1 + ", parameter_2: " + parameter_2 + ")";
+			return "ChannelEvent(" + base.ToString () + ", midi_channel: " + midi_channel + ", parameter_1: " + parameter_1 + ", parameter_2: " + parameter_2 + ")";
 		}
 	}
 }
-

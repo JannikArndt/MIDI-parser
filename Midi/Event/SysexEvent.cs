@@ -31,8 +31,7 @@ namespace Midi.Event
 		
 		public override string ToString ()
 		{
-			return "SysexEvent(" + base.ToString() + ")";
+			return "SysexEvent(" + base.ToString () + ")";
 		}
 	}
 }
-

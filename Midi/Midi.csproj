@@ -32,7 +32,6 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="Event\Event.cs" />
     <Compile Include="Event\MetaEvent.cs" />
     <Compile Include="Event\SysexEvent.cs" />
     <Compile Include="FileParser.cs" />
@@ -41,6 +40,7 @@
     <Compile Include="HeaderChunk.cs" />
     <Compile Include="TrackChunk.cs" />
     <Compile Include="Event\ChannelEvent.cs" />
+    <Compile Include="Event\MidiEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Event\" />
