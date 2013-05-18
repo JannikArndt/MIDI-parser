@@ -19,22 +19,27 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-using TrackEvents = System.Collections.Generic.List<Midi.Events.MidiEvent>;
+using TracksIn = System.Collections.Generic.IEnumerable<Midi.Chunks.TrackChunk>;
+using Tracks = System.Collections.Generic.List<Midi.Chunks.TrackChunk>;
+using HeaderChunk = Midi.Chunks.HeaderChunk;
+using System.Linq;
 
-namespace Midi.Chunks
+namespace Midi
 {
-	public sealed class TrackChunk : Chunk
+	public class MidiData
 	{
-		public readonly TrackEvents events;
+		public readonly HeaderChunk header;
+		public readonly Tracks tracks;
 
-		public TrackChunk (TrackEvents events) : base("MTrk")
+		public MidiData (HeaderChunk header, TracksIn tracks)
 		{
-			this.events = events;
+			this.header = header;
+			this.tracks = tracks.ToList ();
 		}
-		
-		override public string ToString ()
+
+		public override string ToString ()
 		{
-			return "TrackChunk(" + base.ToString () + ", events: '" + events + "')";
+			return "MidiFile(header: " + header + ", tracks: " + tracks + ")";
 		}
 	}
 }

@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 namespace Midi.Events.ChannelEvents
 {
-	public class PitchBendEvent : ChannelEvent
+	public sealed class PitchBendEvent : ChannelEvent
 	{
 		public readonly byte pitch_value_LSB;
 		public readonly byte pitch_value_MSB;

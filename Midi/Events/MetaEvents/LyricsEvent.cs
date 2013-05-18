@@ -20,24 +20,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-namespace Midi.Events
+namespace Midi.Events.MetaEvents
 {
-	public class MetaEvent : MidiEvent
+	public sealed class LyricsEvent : MetaEvent
 	{
-		public readonly byte meta_event_type;
-		public readonly int length;
-		public readonly byte[] data;
-
-		public MetaEvent (int delta_time, byte type, byte meta_event_type, int length, byte[] data) : base(delta_time, type)
+		public LyricsEvent (int delta_time) : base(delta_time, 0x05)
 		{
-			this.meta_event_type = meta_event_type;
-			this.length = length;
-			this.data = data;
 		}
 		
 		public override string ToString ()
 		{
-			return "MetaEvent(" + base.ToString () + ", meta_event_type: " + meta_event_type + ", length: " + length + ", data: " + data + ")";
+			return "LyricsEvent(" + base.ToString () + ")";
 		}
 	}
 }
+

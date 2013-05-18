@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 namespace Midi.Events.ChannelEvents
 {
-	public class NoteAftertouchEvent : ChannelEvent
+	public sealed class NoteAftertouchEvent : ChannelEvent
 	{
 		public readonly byte note_number;
 		public readonly byte aftertouch_value;

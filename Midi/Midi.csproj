@@ -33,8 +33,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Compile Include="FileParser.cs" />
-    <Compile Include="MidiFile.cs" />
-    <Compile Include="Events\MetaEvent.cs" />
     <Compile Include="Events\SysexEvent.cs" />
     <Compile Include="Events\MidiEvent.cs" />
     <Compile Include="Chunks\Chunk.cs" />
@@ -48,11 +46,29 @@
     <Compile Include="Events\ChannelEvents\NoteOnEvent.cs" />
     <Compile Include="Events\ChannelEvents\PitchBendEvent.cs" />
     <Compile Include="Events\ChannelEvents\ProgramChangeEvent.cs" />
+    <Compile Include="MidiData.cs" />
+    <Compile Include="Events\MetaEvents\SequenceNumberEvent.cs" />
+    <Compile Include="Events\MetaEvents\TextEvent.cs" />
+    <Compile Include="Events\MetaEvents\CopyrightNoticeEvent.cs" />
+    <Compile Include="Events\MetaEvents\SequenceOrTrackNameEvent.cs" />
+    <Compile Include="Events\MetaEvents\InstrumentNameEvent.cs" />
+    <Compile Include="Events\MetaEvents\LyricsEvent.cs" />
+    <Compile Include="Events\MetaEvents\MarkerEvent.cs" />
+    <Compile Include="Events\MetaEvents\CuePointEvent.cs" />
+    <Compile Include="Events\MetaEvents\MIDIChannelPrefixEvent.cs" />
+    <Compile Include="Events\MetaEvents\EndOfTrackEvent.cs" />
+    <Compile Include="Events\MetaEvents\SetTempoEvent.cs" />
+    <Compile Include="Events\MetaEvents\SMPTEOffsetEvent.cs" />
+    <Compile Include="Events\MetaEvents\TimeSignatureEvent.cs" />
+    <Compile Include="Events\MetaEvents\KeySignatureEvent.cs" />
+    <Compile Include="Events\MetaEvents\SequencerSpecificEvent.cs" />
+    <Compile Include="Events\MetaEvents\MetaEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Events\" />
     <Folder Include="Chunks\" />
     <Folder Include="Events\ChannelEvents\" />
+    <Folder Include="Events\MetaEvents\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />

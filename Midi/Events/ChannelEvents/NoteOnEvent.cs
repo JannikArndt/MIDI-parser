@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 namespace Midi.Events.ChannelEvents
 {
-	public class NoteOnEvent : ChannelEvent
+	public sealed class NoteOnEvent : ChannelEvent
 	{
 		public readonly byte note_number;
 		public readonly byte velocity;

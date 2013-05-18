@@ -19,27 +19,23 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-using System.Linq;
-using BitConverter = System.BitConverter;
 
 namespace Midi.Chunks
 {
-	public class HeaderChunk : Chunk
+	public sealed class HeaderChunk : Chunk
 	{
-		public readonly int format_type;
-		public readonly int number_of_tracks;
-		public readonly int time_division;
+		public readonly ushort format_type;
+		public readonly ushort time_division;
 
-		public HeaderChunk (string chunk_ID, int chunk_size, byte[] header_data) : base(chunk_ID, chunk_size)
+		public HeaderChunk (ushort format_type, ushort time_division) : base("MThd")
 		{
-			this.format_type = BitConverter.ToInt16 (header_data.Take (2).Reverse ().ToArray<byte> (), 0);
-			this.number_of_tracks = BitConverter.ToInt16 (header_data.Skip (2).Take (2).Reverse ().ToArray<byte> (), 0);
-			this.time_division = BitConverter.ToInt16 (header_data.Skip (4).Take (2).Reverse ().ToArray<byte> (), 0);
+			this.format_type = format_type;
+			this.time_division = time_division;
 		}
 
 		override public string ToString ()
 		{
-			return "HeaderChunk(" + base.ToString () + ", format_type: " + format_type + ", number_of_tracks: " + number_of_tracks + ", time_division: " + time_division + ")";
+			return "HeaderChunk(" + base.ToString () + ", format_type: " + format_type + ", time_division: " + time_division + ")";
 		}
 	}
 }

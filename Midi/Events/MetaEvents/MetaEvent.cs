@@ -19,22 +19,21 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-using TrackEvents = System.Collections.Generic.List<Midi.Events.MidiEvent>;
 
-namespace Midi.Chunks
+namespace Midi.Events.MetaEvents
 {
-	public sealed class TrackChunk : Chunk
+	public abstract class MetaEvent : MidiEvent
 	{
-		public readonly TrackEvents events;
+		public readonly byte meta_event_type;
 
-		public TrackChunk (TrackEvents events) : base("MTrk")
+		public MetaEvent (int delta_time, byte meta_event_type) : base(delta_time, 0xFF)
 		{
-			this.events = events;
+			this.meta_event_type = meta_event_type;
 		}
 		
-		override public string ToString ()
+		public override string ToString ()
 		{
-			return "TrackChunk(" + base.ToString () + ", events: '" + events + "')";
+			return "MetaEvent(" + base.ToString () + ", meta_event_type: " + meta_event_type + ")";
 		}
 	}
 }

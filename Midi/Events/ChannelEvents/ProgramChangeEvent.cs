@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 namespace Midi.Events.ChannelEvents
 {
-	public class ProgramChangeEvent : ChannelEvent
+	public sealed class ProgramChangeEvent : ChannelEvent
 	{
 		public readonly byte program_number;
 

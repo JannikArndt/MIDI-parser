@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 namespace Midi.Events.ChannelEvents
 {
-	public class ControllerEvent : ChannelEvent
+	public sealed class ControllerEvent : ChannelEvent
 	{
 		public readonly byte controller_number;
 		public readonly byte controller_value;
