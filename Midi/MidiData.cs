@@ -22,6 +22,7 @@ THE SOFTWARE.
 using TracksIn = System.Collections.Generic.IEnumerable<Midi.Chunks.TrackChunk>;
 using Tracks = System.Collections.Generic.List<Midi.Chunks.TrackChunk>;
 using HeaderChunk = Midi.Chunks.HeaderChunk;
+using TrackChunk = Midi.Chunks.TrackChunk;
 using System.Linq;
 
 namespace Midi
@@ -39,7 +40,10 @@ namespace Midi
 
 		public override string ToString ()
 		{
-			return "MidiFile(header: " + header + ", tracks: " + tracks + ")";
+			string tracks_string = tracks.Aggregate ("", (string a, TrackChunk b) => a + b + ", ");
+			tracks_string = tracks_string.Remove (tracks_string.Length - 2);
+
+			return "MidiFile(header: " + header + ", tracks: [" + tracks_string + "])";
 		}
 	}
 }

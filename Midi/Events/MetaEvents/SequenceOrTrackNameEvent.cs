@@ -24,13 +24,16 @@ namespace Midi.Events.MetaEvents
 {
 	public sealed class SequenceOrTrackNameEvent : MetaEvent
 	{
-		public SequenceOrTrackNameEvent (int delta_time) : base(delta_time, 0x03)
+		public readonly string name;
+
+		public SequenceOrTrackNameEvent (string name) : base(0, 0x03)
 		{
+			this.name = name;
 		}
 		
 		public override string ToString ()
 		{
-			return "SequenceOrTrackNameEvent(" + base.ToString () + ")";
+			return "SequenceOrTrackNameEvent(" + base.ToString () + ", name: " + name + ")";
 		}
 	}
 }

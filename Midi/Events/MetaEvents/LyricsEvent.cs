@@ -24,13 +24,16 @@ namespace Midi.Events.MetaEvents
 {
 	public sealed class LyricsEvent : MetaEvent
 	{
-		public LyricsEvent (int delta_time) : base(delta_time, 0x05)
+		public readonly string text;
+
+		public LyricsEvent (int delta_time, string text) : base(delta_time, 0x05)
 		{
+			this.text = text;
 		}
 		
 		public override string ToString ()
 		{
-			return "LyricsEvent(" + base.ToString () + ")";
+			return "LyricsEvent(" + base.ToString () + ", text: " + text + ")";
 		}
 	}
 }

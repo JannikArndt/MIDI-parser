@@ -24,13 +24,16 @@ namespace Midi.Events.MetaEvents
 {
 	public sealed class CopyrightNoticeEvent : MetaEvent
 	{
-		public CopyrightNoticeEvent () : base(0, 0x02)
+		public readonly string notice;
+
+		public CopyrightNoticeEvent (string notice) : base(0, 0x02)
 		{
+			this.notice = notice;
 		}
 		
 		public override string ToString ()
 		{
-			return "CopyrightNoticeEvent(" + base.ToString () + ")";
+			return "CopyrightNoticeEvent(" + base.ToString () + ", notice: " + notice + ")";
 		}
 	}
 }

@@ -24,13 +24,16 @@ namespace Midi.Events.MetaEvents
 {
 	public sealed class InstrumentNameEvent : MetaEvent
 	{
-		public InstrumentNameEvent (int delta_time) : base(delta_time, 0x04)
+		public readonly string name;
+
+		public InstrumentNameEvent (int delta_time, string name) : base(delta_time, 0x04)
 		{
+			this.name = name;
 		}
 		
 		public override string ToString ()
 		{
-			return "InstrumentNameEvent(" + base.ToString () + ")";
+			return "InstrumentNameEvent(" + base.ToString () + ", name: " + name + ")";
 		}
 	}
 }

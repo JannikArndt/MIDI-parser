@@ -24,13 +24,24 @@ namespace Midi.Events.MetaEvents
 {
 	public sealed class SMPTEOffsetEvent : MetaEvent
 	{
-		public SMPTEOffsetEvent (int delta_time) : base(delta_time, 0x54)
+		public readonly int hours;
+		public readonly int minutes;
+		public readonly int seconds;
+		public readonly int frames;
+		public readonly int subframes;
+
+		public SMPTEOffsetEvent (int delta_time, int hours, int minutes, int seconds, int frames, int subframes) : base(delta_time, 0x54)
 		{
+			this.hours = hours;
+			this.minutes = minutes;
+			this.seconds = seconds;
+			this.frames = frames;
+			this.subframes = subframes;
 		}
 		
 		public override string ToString ()
 		{
-			return "SMPTEOffsetEvent(" + base.ToString () + ")";
+			return "SMPTEOffsetEvent(" + base.ToString () + ", hours: " + hours + ", minutes: " + minutes + ", seconds: " + seconds + ", frames: " + frames + ", subframes: " + subframes + ")";
 		}
 	}
 }

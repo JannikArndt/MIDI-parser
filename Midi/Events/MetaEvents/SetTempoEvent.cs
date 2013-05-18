@@ -24,13 +24,19 @@ namespace Midi.Events.MetaEvents
 {
 	public sealed class SetTempoEvent : MetaEvent
 	{
-		public SetTempoEvent (int delta_time) : base(delta_time, 0x51)
+		public readonly int tempo;
+
+		public SetTempoEvent (int delta_time, int tempo) : base(delta_time, 0x51)
 		{
+			if (tempo < 0 || tempo > 0x7F7F7F) {
+				throw new System.ArgumentOutOfRangeException();
+			}
+			this.tempo = tempo;
 		}
 		
 		public override string ToString ()
 		{
-			return "SetTempoEvent(" + base.ToString () + ")";
+			return "SetTempoEvent(" + base.ToString () + ", tempo: " + tempo + "Microseconds/Quarter-Note)";
 		}
 	}
 }

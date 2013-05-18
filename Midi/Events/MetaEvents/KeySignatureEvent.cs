@@ -22,15 +22,32 @@ THE SOFTWARE.
 
 namespace Midi.Events.MetaEvents
 {
+	public enum Scales {
+		Major = 0,
+		Minor = 1
+	};
+
 	public sealed class KeySignatureEvent : MetaEvent
 	{
-		public KeySignatureEvent (int delta_time) : base(delta_time, 0x59)
+		public readonly byte scale;
+		public readonly short key;
+
+		public KeySignatureEvent (int delta_time, byte key, byte scale) : base(delta_time, 0x59)
 		{
+			
+			/*if (key < -7 || key > 7) {
+				throw new System.ArgumentOutOfRangeException();
+			}*/
+			if (scale < 0 || scale > 1) {
+				throw new System.ArgumentOutOfRangeException();
+			}
+			this.key = key;
+			this.scale = scale;
 		}
 		
 		public override string ToString ()
 		{
-			return "KeySignatureEvent(" + base.ToString () + ")";
+			return "KeySignatureEvent(" + base.ToString () + ", key: " + key + ", scale: " + scale + ")";
 		}
 	}
 }

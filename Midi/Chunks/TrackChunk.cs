@@ -19,22 +19,41 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-using TrackEvents = System.Collections.Generic.List<Midi.Events.MidiEvent>;
+using TrackEventsIEnumerable = System.Collections.Generic.IEnumerable<Midi.Events.MidiEvent>;
+using TrackEventsList = System.Collections.Generic.List<Midi.Events.MidiEvent>;
+using System.Linq;
+using MidiEvent = Midi.Events.MidiEvent;
 
 namespace Midi.Chunks
 {
 	public sealed class TrackChunk : Chunk
 	{
-		public readonly TrackEvents events;
+		// Lazy loading mechanism
+		private TrackEventsIEnumerable _events;
 
-		public TrackChunk (TrackEvents events) : base("MTrk")
+		public TrackEventsList events {
+			get {
+				switch (_events.GetType () == typeof(TrackEventsList)) {
+				case false:
+					_events = _events.ToList ();
+					break;
+				}
+				return (TrackEventsList)_events;
+			}
+			private set {}
+		}
+
+		public TrackChunk (TrackEventsIEnumerable events) : base("MTrk")
 		{
-			this.events = events;
+ 			this._events = events;
 		}
 		
 		override public string ToString ()
 		{
-			return "TrackChunk(" + base.ToString () + ", events: '" + events + "')";
+			string events_string = events.Aggregate ("", (string a, MidiEvent b) => a + b + ", ");
+			events_string = events_string.Remove (events_string.Length - 2);
+
+			return "TrackChunk(" + base.ToString () + ", events: [" + events_string + "])";
 		}
 	}
 }

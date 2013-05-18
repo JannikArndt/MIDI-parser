@@ -19,18 +19,22 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
+using Data = System.Collections.Generic.IEnumerable<byte>;
 
 namespace Midi.Events.MetaEvents
 {
 	public sealed class SequencerSpecificEvent : MetaEvent
 	{
-		public SequencerSpecificEvent (int delta_time) : base(delta_time, 0x7F)
+		public readonly Data data;
+
+		public SequencerSpecificEvent (int delta_time, Data data) : base(delta_time, 0x7F)
 		{
+			this.data = data;
 		}
 		
 		public override string ToString ()
 		{
-			return "SequencerSpecificEvent(" + base.ToString () + ")";
+			return "SequencerSpecificEvent(" + base.ToString () + ", data: " + data + ")";
 		}
 	}
 }
