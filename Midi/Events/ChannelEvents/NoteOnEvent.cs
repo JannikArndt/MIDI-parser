@@ -20,22 +20,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-namespace Midi
+namespace Midi.Events.ChannelEvents
 {
-	public abstract class Chunk
+	public class NoteOnEvent : ChannelEvent
 	{
-		public readonly string chunk_ID;
-		public readonly int chunk_size;
+		public readonly byte note_number;
+		public readonly byte velocity;
 
-		public Chunk (string chunk_ID, int chunk_size)
+		public NoteOnEvent (int delta_time, byte midi_channel, byte note_number, byte velocity) : base (delta_time, 0x90, midi_channel)
 		{
-			this.chunk_ID = chunk_ID;
-			this.chunk_size = chunk_size;
+			this.note_number = note_number;
+			this.velocity = velocity;
 		}
-
-		override public string ToString ()
+		
+		public override string ToString ()
 		{
-			return "Chunk(chunk_ID: " + chunk_ID + ", chunk_size: " + chunk_size + ")";
+			return "NoteOnEvent(" + base.ToString () + ", note_number: " + note_number + ", velocity: " + velocity + ")";
 		}
 	}
 }
+

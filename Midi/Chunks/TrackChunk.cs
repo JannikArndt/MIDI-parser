@@ -20,39 +20,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 using System.Linq;
-using TrackEvents = System.Collections.Generic.List<Midi.Event.MidiEvent>;
+using TrackEvents = System.Collections.Generic.List<Midi.Events.MidiEvent>;
 using StringEncoder = System.Text.UTF7Encoding;
 using ByteList = System.Collections.Generic.List<byte>;
 using BitConverter = System.BitConverter;
-using MidiEvent = Midi.Event.MidiEvent;
-using MetaEvent = Midi.Event.MetaEvent;
-using ChannelEvent = Midi.Event.ChannelEvent;
+using MidiEvent = Midi.Events.MidiEvent;
+using MetaEvent = Midi.Events.MetaEvent;
 using ArgumentException = System.ArgumentException;
 
-namespace Midi
+// Channel Events
+using ChannelAftertouchEvent = Midi.Events.ChannelEvents.ChannelAftertouchEvent;
+using ControllerEvent = Midi.Events.ChannelEvents.ControllerEvent;
+using NoteAftertouchEvent = Midi.Events.ChannelEvents.NoteAftertouchEvent;
+using NoteOffEvent = Midi.Events.ChannelEvents.NoteOffEvent;
+using NoteOnEvent = Midi.Events.ChannelEvents.NoteOnEvent;
+using PitchBendEvent = Midi.Events.ChannelEvents.PitchBendEvent;
+using ProgramChangeEvent = Midi.Events.ChannelEvents.ProgramChangeEvent;
+
+namespace Midi.Chunks
 {
 	public class TrackChunk : Chunk
 	{
-		private readonly byte[] track_data;
-		// Lazy loading of the events list
-		private TrackEvents _events = null;
-
-		public TrackEvents events {
-			get {
-				switch (_events == null) {
-				case true:
-					_events = parse_events (this.chunk_size, this.track_data);
-					return _events;
-				default:
-					return _events;
-				}
-			}
-			private set {}
-		}
+		public readonly TrackEvents events = new TrackEvents ();
 
 		public TrackChunk (string chunk_ID, int chunk_size, byte[] track_data) : base(chunk_ID, chunk_size)
 		{
-			this.track_data = track_data;
+			this.events = parse_events (this.chunk_size, track_data);
 		}
 
 		private static TrackEvents parse_events (int chunk_size, byte[] track_data)
@@ -61,33 +54,71 @@ namespace Midi
 			StringEncoder stringEncoder = new StringEncoder ();
 
 			int i = 0;
-			ByteList delta_time_bytes = new ByteList ();
+
+			int delta_time = 0;
 			while (i < chunk_size) {
-				delta_time_bytes.Add (track_data [i]);
 				
-				switch (track_data [i] == 0x00) {
+				switch (track_data [i] < 0x80) {
 					
 				// End of delta time reached
 				case true:
+
+					delta_time += track_data [i];
+
 					i += 1;
-					
 					byte event_type_value = track_data [i];
-					int delta_time = 0;
-					try {
-						delta_time = BitConverter.ToInt16 (delta_time_bytes.ToArray<byte> ().Reverse ().ToArray<byte> (), 0);
-					} catch (ArgumentException e) {
-						delta_time = 0;
-					}
 					
 					// MIDI Channel Events
 					if ((event_type_value & 0xF0) < 0xF0) {
-						
+
+						byte midi_channel_event_type = (byte)(event_type_value & 0xF0);
 						byte midi_channel = (byte)(event_type_value & 0x0F);
 						i += 1;
 						byte parameter_1 = track_data [i];
+						byte parameter_2 = 0x00;
+
+						// One or two parameter type
+						switch (midi_channel_event_type) {
+						
+						// One parameter types
+						case 0xC0:
+							events.Add (new ProgramChangeEvent (delta_time, midi_channel, parameter_1));
+							break;
+						case 0xD0:
+							events.Add (new ChannelAftertouchEvent (delta_time, midi_channel, parameter_1));
+							break;
+						
+						// Two parameter types
+						case 0x80:
+							i += 1;
+							parameter_2 = track_data [i];
+							events.Add (new NoteOffEvent (delta_time, midi_channel, parameter_1, parameter_2));
+							break;
+						case 0x90:
+							i += 1;
+							parameter_2 = track_data [i];
+							events.Add (new NoteOnEvent (delta_time, midi_channel, parameter_1, parameter_2));
+							break;
+						case 0xA0:
+							i += 1;
+							parameter_2 = track_data [i];
+							events.Add (new NoteAftertouchEvent (delta_time, midi_channel, parameter_1, parameter_2));
+							break;
+						case 0xB0:
+							i += 1;
+							parameter_2 = track_data [i];
+							events.Add (new ControllerEvent (delta_time, midi_channel, parameter_1, parameter_2));
+							break;
+						case 0xE0:
+							i += 1;
+							parameter_2 = track_data [i];
+							events.Add (new PitchBendEvent (delta_time, midi_channel, parameter_1, parameter_2));
+							break;
+						}
+
+						//events.Add (new ChannelEvent (delta_time, midi_channel_event_type, midi_channel, parameter_1, parameter_2));
+
 						i += 1;
-						byte parameter_2 = track_data [i];
-						events.Add (new ChannelEvent (delta_time, event_type_value, midi_channel, parameter_1, parameter_2));
 					}
 					// Meta Events
 					else if (event_type_value == 0xFF) {
@@ -104,19 +135,20 @@ namespace Midi
 							meta_event_length,
 							meta_event_data
 						));
+
 						i += meta_event_length;
 					}
 					// System Exclusive Events
 					else if (event_type_value == 0xF0) {
 						throw new ArgumentException ("System Exclusive Events not yet supported");
 					}
-					
-					i += 1;
-					
-					delta_time_bytes = new ByteList ();
+
+					delta_time = 0;
+
 					break;
 				// End of delta time not yet reached
 				case false:
+					delta_time += track_data [i];
 					i += 1;
 					break;
 				}

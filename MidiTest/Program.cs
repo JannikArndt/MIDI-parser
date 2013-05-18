@@ -27,6 +27,7 @@ namespace MidiTest
 			System.Console.Out.WriteLine (midi_file.tracks.ElementAt (3).events.Count);
 			//System.Console.Out.WriteLine (midi_file.tracks.ElementAt (3).events.Count);
 			//System.Console.Out.WriteLine (midi_file.tracks.ElementAt (3).events.Count);
+			midi_file.tracks.ElementAt (2).events.ForEach((Midi.Events.MidiEvent x) => System.Console.Out.WriteLine (x));
 
 			DateTime end = System.DateTime.Now;
 			System.Console.Out.WriteLine ("END: " + (end - start) + " Milliseconds");

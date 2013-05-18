@@ -20,18 +20,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-namespace Midi.Event
+namespace Midi.Events.ChannelEvents
 {
-	public abstract class SysexEvent : MidiEvent
+	public class ControllerEvent : ChannelEvent
 	{
-		public SysexEvent (int delta_time, byte event_type) : base(delta_time, event_type)
-		{
+		public readonly byte controller_number;
+		public readonly byte controller_value;
 
+		public ControllerEvent (int delta_time, byte midi_channel, byte controller_number, byte controller_value) : base (delta_time, 0xB0, midi_channel)
+		{
+			this.controller_number = controller_number;
+			this.controller_value = controller_value;
 		}
 		
 		public override string ToString ()
 		{
-			return "SysexEvent(" + base.ToString () + ")";
+			return "ControllerEvent(" + base.ToString () + ", controller_number: " + controller_number + ", controller_value: " + controller_value + ")";
 		}
 	}
 }
+

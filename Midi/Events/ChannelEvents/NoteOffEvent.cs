@@ -20,24 +20,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-namespace Midi.Event
+namespace Midi.Events.ChannelEvents
 {
-	public class ChannelEvent : MidiEvent
+	public class NoteOffEvent : ChannelEvent
 	{
-		public readonly byte midi_channel;
-		public readonly byte parameter_1;
-		public readonly byte parameter_2;
+		public readonly byte note_number;
+		public readonly byte velocity;
 
-		public ChannelEvent (int delta_time, byte event_type, byte midi_channel, byte parameter_1, byte parameter_2) : base(delta_time, event_type)
+		public NoteOffEvent (int delta_time, byte midi_channel, byte note_number, byte velocity) : base (delta_time, 0x80, midi_channel)
 		{
-			this.midi_channel = midi_channel;
-			this.parameter_1 = parameter_1;
-			this.parameter_2 = parameter_2;
+			this.note_number = note_number;
+			this.velocity = velocity;
 		}
 		
 		public override string ToString ()
 		{
-			return "ChannelEvent(" + base.ToString () + ", midi_channel: " + midi_channel + ", parameter_1: " + parameter_1 + ", parameter_2: " + parameter_2 + ")";
+			return "NoteOffEvent(" + base.ToString () + ", note_number: " + note_number + ", velocity: " + velocity + ")";
 		}
 	}
 }
+

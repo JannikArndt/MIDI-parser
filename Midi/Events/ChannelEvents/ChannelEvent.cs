@@ -20,27 +20,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-using TracksIn = System.Collections.Generic.IEnumerable<Midi.Chunks.TrackChunk>;
-using Tracks = System.Collections.Generic.List<Midi.Chunks.TrackChunk>;
-using HeaderChunk = Midi.Chunks.HeaderChunk;
-using System.Linq;
-
-namespace Midi
+namespace Midi.Events.ChannelEvents
 {
-	public class MidiFile
+	public abstract class ChannelEvent : MidiEvent
 	{
-		public readonly HeaderChunk header;
-		public readonly Tracks tracks;
+		public readonly byte midi_channel;
 
-		public MidiFile (HeaderChunk header, TracksIn tracks)
+		public ChannelEvent (int delta_time, byte event_type, byte midi_channel) : base(delta_time, event_type)
 		{
-			this.header = header;
-			this.tracks = tracks.ToList ();
+			this.midi_channel = midi_channel;
 		}
-
+		
 		public override string ToString ()
 		{
-			return "MidiFile(header: " + header + ", tracks: " + tracks + ")";
+			return "ChannelEvent(" + base.ToString () + ", midi_channel: " + midi_channel + ")";
 		}
 	}
 }

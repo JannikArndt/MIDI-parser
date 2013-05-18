@@ -20,27 +20,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-using TracksIn = System.Collections.Generic.IEnumerable<Midi.Chunks.TrackChunk>;
-using Tracks = System.Collections.Generic.List<Midi.Chunks.TrackChunk>;
-using HeaderChunk = Midi.Chunks.HeaderChunk;
-using System.Linq;
-
-namespace Midi
+namespace Midi.Events.ChannelEvents
 {
-	public class MidiFile
+	public class PitchBendEvent : ChannelEvent
 	{
-		public readonly HeaderChunk header;
-		public readonly Tracks tracks;
+		public readonly byte pitch_value_LSB;
+		public readonly byte pitch_value_MSB;
 
-		public MidiFile (HeaderChunk header, TracksIn tracks)
+		public PitchBendEvent (int delta_time, byte midi_channel, byte pitch_value_LSB, byte pitch_value_MSB) : base (delta_time, 0xE0, midi_channel)
 		{
-			this.header = header;
-			this.tracks = tracks.ToList ();
+			this.pitch_value_LSB = pitch_value_LSB;
+			this.pitch_value_MSB = pitch_value_MSB;
 		}
-
+		
 		public override string ToString ()
 		{
-			return "MidiFile(header: " + header + ", tracks: " + tracks + ")";
+			return "PitchBendEvent(" + base.ToString () + ", pitch_value_LSB: " + pitch_value_LSB + ", pitch_value_MSB: " + pitch_value_MSB + ")";
 		}
 	}
 }
+

@@ -22,7 +22,7 @@ THE SOFTWARE.
 using System.Linq;
 using BitConverter = System.BitConverter;
 
-namespace Midi
+namespace Midi.Chunks
 {
 	public class HeaderChunk : Chunk
 	{

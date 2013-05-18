@@ -23,7 +23,9 @@ using System.Linq;
 using FileStream = System.IO.FileStream;
 using BinaryReader = System.IO.BinaryReader;
 using BitConverter = System.BitConverter;
-using Tracks = System.Collections.Generic.List<Midi.TrackChunk>;
+using Tracks = System.Collections.Generic.List<Midi.Chunks.TrackChunk>;
+using HeaderChunk = Midi.Chunks.HeaderChunk;
+using TrackChunk = Midi.Chunks.TrackChunk;
 using StringEncoder = System.Text.UTF7Encoding;
 using TrackData = System.Collections.Generic.Dictionary<string, object>;
 

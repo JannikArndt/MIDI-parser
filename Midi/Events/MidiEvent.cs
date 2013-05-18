@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-namespace Midi.Event
+namespace Midi.Events
 {
 	public abstract class MidiEvent
 	{

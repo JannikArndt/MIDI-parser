@@ -20,24 +20,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-namespace Midi.Event
+namespace Midi.Events.ChannelEvents
 {
-	public class MetaEvent : MidiEvent
+	public class ProgramChangeEvent : ChannelEvent
 	{
-		public readonly byte meta_event_type;
-		public readonly int length;
-		public readonly byte[] data;
+		public readonly byte program_number;
 
-		public MetaEvent (int delta_time, byte type, byte meta_event_type, int length, byte[] data) : base(delta_time, type)
+		public ProgramChangeEvent (int delta_time, byte midi_channel, byte program_number) : base (delta_time, 0xC0, midi_channel)
 		{
-			this.meta_event_type = meta_event_type;
-			this.length = length;
-			this.data = data;
+			this.program_number = program_number;
 		}
 		
 		public override string ToString ()
 		{
-			return "MetaEvent(" + base.ToString () + ", meta_event_type: " + meta_event_type + ", length: " + length + ", data: " + data + ")";
+			return "ProgramChangeEvent(" + base.ToString () + ", program_number: " + program_number + ")";
 		}
 	}
 }
+

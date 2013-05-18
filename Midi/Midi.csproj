@@ -32,23 +32,29 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="Event\MetaEvent.cs" />
-    <Compile Include="Event\SysexEvent.cs" />
     <Compile Include="FileParser.cs" />
     <Compile Include="MidiFile.cs" />
-    <Compile Include="Chunk.cs" />
-    <Compile Include="HeaderChunk.cs" />
-    <Compile Include="TrackChunk.cs" />
-    <Compile Include="Event\ChannelEvent.cs" />
-    <Compile Include="Event\MidiEvent.cs" />
+    <Compile Include="Events\MetaEvent.cs" />
+    <Compile Include="Events\SysexEvent.cs" />
+    <Compile Include="Events\MidiEvent.cs" />
+    <Compile Include="Chunks\Chunk.cs" />
+    <Compile Include="Chunks\HeaderChunk.cs" />
+    <Compile Include="Chunks\TrackChunk.cs" />
+    <Compile Include="Events\ChannelEvents\ChannelEvent.cs" />
+    <Compile Include="Events\ChannelEvents\ChannelAftertouchEvent.cs" />
+    <Compile Include="Events\ChannelEvents\ControllerEvent.cs" />
+    <Compile Include="Events\ChannelEvents\NoteAftertouchEvent.cs" />
+    <Compile Include="Events\ChannelEvents\NoteOffEvent.cs" />
+    <Compile Include="Events\ChannelEvents\NoteOnEvent.cs" />
+    <Compile Include="Events\ChannelEvents\PitchBendEvent.cs" />
+    <Compile Include="Events\ChannelEvents\ProgramChangeEvent.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Event\" />
+    <Folder Include="Events\" />
+    <Folder Include="Chunks\" />
+    <Folder Include="Events\ChannelEvents\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="LICENSE" />
   </ItemGroup>
 </Project>
