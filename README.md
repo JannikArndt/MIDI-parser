@@ -3,7 +3,7 @@ MIDI-parser
 
 A C# MIDI parser
 
-Latest version compiled with mono: https://dm121506.students.fhstp.ac.at/Projects/MIDIParser/Midi.dll
+Latest version compiled with mono: http://dm121506.students.fhstp.ac.at/Projects/MIDIParser/
 
 Usage:
 
