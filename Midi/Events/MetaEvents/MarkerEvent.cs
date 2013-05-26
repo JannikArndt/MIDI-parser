@@ -22,19 +22,20 @@ THE SOFTWARE.
 
 namespace Midi.Events.MetaEvents
 {
-	public sealed class MarkerEvent : MetaEvent
-	{
-		public readonly string text;
+    public sealed class MarkerEvent : MetaEvent
+    {
+        public readonly string text;
 
-		public MarkerEvent (int delta_time, string text) : base(delta_time, 0x06)
-		{
-			this.text = text;
-		}
-		
-		public override string ToString ()
-		{
-			return "MarkerEvent(" + base.ToString () + ", text: " + text+ ")";
-		}
-	}
+        public MarkerEvent(int delta_time, string text)
+            : base(delta_time, 0x06)
+        {
+            this.text = text;
+        }
+
+        public override string ToString()
+        {
+            return "MarkerEvent(" + base.ToString() + ", text: " + text + ")";
+        }
+    }
 }
 

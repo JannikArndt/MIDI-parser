@@ -22,22 +22,24 @@ THE SOFTWARE.
 
 namespace Midi.Events.MetaEvents
 {
-	public sealed class MIDIChannelPrefixEvent : MetaEvent
-	{
-		public readonly byte channel;
+    public sealed class MIDIChannelPrefixEvent : MetaEvent
+    {
+        public readonly byte channel;
 
-		public MIDIChannelPrefixEvent (int delta_time, byte channel) : base(delta_time, 0x20)
-		{
-			if (channel < 0 || channel > 15) {
-				throw new System.ArgumentOutOfRangeException();
-			}
-			this.channel = channel;
-		}
-		
-		public override string ToString ()
-		{
-			return "MIDIChannelPrefixEvent(" + base.ToString () + ", channel: " + channel + ")";
-		}
-	}
+        public MIDIChannelPrefixEvent(int delta_time, byte channel)
+            : base(delta_time, 0x20)
+        {
+            if (channel < 0 || channel > 15)
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
+            this.channel = channel;
+        }
+
+        public override string ToString()
+        {
+            return "MIDIChannelPrefixEvent(" + base.ToString() + ", channel: " + channel + ")";
+        }
+    }
 }
 

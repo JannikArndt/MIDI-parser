@@ -26,34 +26,38 @@ using MidiEvent = Midi.Events.MidiEvent;
 
 namespace Midi.Chunks
 {
-	public sealed class TrackChunk : Chunk
-	{
-		// Lazy loading mechanism
-		private TrackEventsIEnumerable _events;
+    public sealed class TrackChunk : Chunk
+    {
+        // Lazy loading mechanism
+        private TrackEventsIEnumerable _events;
 
-		public TrackEventsList events {
-			get {
-				switch (_events.GetType () == typeof(TrackEventsList)) {
-				case false:
-					_events = _events.ToList ();
-					break;
-				}
-				return (TrackEventsList)_events;
-			}
-			private set {}
-		}
+        public TrackEventsIEnumerable events
+        {
+            get
+            {
+                switch (_events.GetType() == typeof(TrackEventsList))
+                {
+                    case false:
+                        _events = _events.ToList();
+                        break;
+                }
+                return _events;
+            }
+            private set { }
+        }
 
-		public TrackChunk (TrackEventsIEnumerable events) : base("MTrk")
-		{
- 			this._events = events;
-		}
-		
-		override public string ToString ()
-		{
-			string events_string = events.Aggregate ("", (string a, MidiEvent b) => a + b + ", ");
-			events_string = events_string.Remove (events_string.Length - 2);
+        public TrackChunk(TrackEventsIEnumerable events)
+            : base("MTrk")
+        {
+            this._events = events;
+        }
 
-			return "TrackChunk(" + base.ToString () + ", events: [" + events_string + "])";
-		}
-	}
+        override public string ToString()
+        {
+            string events_string = events.Aggregate("", (string a, MidiEvent b) => a + b + ", ");
+            events_string = events_string.Remove(events_string.Length - 2);
+
+            return "TrackChunk(" + base.ToString() + ", events: [" + events_string + "])";
+        }
+    }
 }

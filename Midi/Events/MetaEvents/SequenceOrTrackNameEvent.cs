@@ -22,19 +22,20 @@ THE SOFTWARE.
 
 namespace Midi.Events.MetaEvents
 {
-	public sealed class SequenceOrTrackNameEvent : MetaEvent
-	{
-		public readonly string name;
+    public sealed class SequenceOrTrackNameEvent : MetaEvent
+    {
+        public readonly string name;
 
-		public SequenceOrTrackNameEvent (string name) : base(0, 0x03)
-		{
-			this.name = name;
-		}
-		
-		public override string ToString ()
-		{
-			return "SequenceOrTrackNameEvent(" + base.ToString () + ", name: " + name + ")";
-		}
-	}
+        public SequenceOrTrackNameEvent(string name)
+            : base(0, 0x03)
+        {
+            this.name = name;
+        }
+
+        public override string ToString()
+        {
+            return "SequenceOrTrackNameEvent(" + base.ToString() + ", name: " + name + ")";
+        }
+    }
 }
 

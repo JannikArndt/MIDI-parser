@@ -22,18 +22,18 @@ THE SOFTWARE.
 
 namespace Midi.Chunks
 {
-	public abstract class Chunk
-	{
-		public readonly string chunk_ID;
+    public abstract class Chunk
+    {
+        public readonly string chunk_ID;
 
-		public Chunk (string chunk_ID)
-		{
-			this.chunk_ID = chunk_ID;
-		}
+        public Chunk(string chunk_ID)
+        {
+            this.chunk_ID = chunk_ID;
+        }
 
-		override public string ToString ()
-		{
-			return "Chunk(chunk_ID: " + chunk_ID + ")";
-		}
-	}
+        override public string ToString()
+        {
+            return "Chunk(chunk_ID: " + chunk_ID + ")";
+        }
+    }
 }

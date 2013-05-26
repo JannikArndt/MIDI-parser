@@ -22,21 +22,22 @@ THE SOFTWARE.
 
 namespace Midi.Events.ChannelEvents
 {
-	public sealed class PitchBendEvent : ChannelEvent
-	{
-		public readonly byte pitch_value_LSB;
-		public readonly byte pitch_value_MSB;
+    public sealed class PitchBendEvent : ChannelEvent
+    {
+        public readonly byte pitch_value_LSB;
+        public readonly byte pitch_value_MSB;
 
-		public PitchBendEvent (int delta_time, byte midi_channel, byte pitch_value_LSB, byte pitch_value_MSB) : base (delta_time, 0xE0, midi_channel)
-		{
-			this.pitch_value_LSB = pitch_value_LSB;
-			this.pitch_value_MSB = pitch_value_MSB;
-		}
-		
-		public override string ToString ()
-		{
-			return "PitchBendEvent(" + base.ToString () + ", pitch_value_LSB: " + pitch_value_LSB + ", pitch_value_MSB: " + pitch_value_MSB + ")";
-		}
-	}
+        public PitchBendEvent(int delta_time, byte midi_channel, byte pitch_value_LSB, byte pitch_value_MSB)
+            : base(delta_time, 0xE0, midi_channel)
+        {
+            this.pitch_value_LSB = pitch_value_LSB;
+            this.pitch_value_MSB = pitch_value_MSB;
+        }
+
+        public override string ToString()
+        {
+            return "PitchBendEvent(" + base.ToString() + ", pitch_value_LSB: " + pitch_value_LSB + ", pitch_value_MSB: " + pitch_value_MSB + ")";
+        }
+    }
 }
 

@@ -22,21 +22,22 @@ THE SOFTWARE.
 
 namespace Midi.Events.ChannelEvents
 {
-	public sealed class NoteOffEvent : ChannelEvent
-	{
-		public readonly byte note_number;
-		public readonly byte velocity;
+    public sealed class NoteOffEvent : ChannelEvent
+    {
+        public readonly byte note_number;
+        public readonly byte velocity;
 
-		public NoteOffEvent (int delta_time, byte midi_channel, byte note_number, byte velocity) : base (delta_time, 0x80, midi_channel)
-		{
-			this.note_number = note_number;
-			this.velocity = velocity;
-		}
-		
-		public override string ToString ()
-		{
-			return "NoteOffEvent(" + base.ToString () + ", note_number: " + note_number + ", velocity: " + velocity + ")";
-		}
-	}
+        public NoteOffEvent(int delta_time, byte midi_channel, byte note_number, byte velocity)
+            : base(delta_time, 0x80, midi_channel)
+        {
+            this.note_number = note_number;
+            this.velocity = velocity;
+        }
+
+        public override string ToString()
+        {
+            return "NoteOffEvent(" + base.ToString() + ", note_number: " + note_number + ", velocity: " + velocity + ")";
+        }
+    }
 }
 

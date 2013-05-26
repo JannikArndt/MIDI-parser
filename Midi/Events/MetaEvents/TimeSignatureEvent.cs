@@ -22,25 +22,26 @@ THE SOFTWARE.
 
 namespace Midi.Events.MetaEvents
 {
-	public sealed class TimeSignatureEvent : MetaEvent
-	{
-		public readonly byte numerator;
-		public readonly byte denominator;
-		public readonly byte metronome_pulse;
-		public readonly byte number_of_32nd_notes_per_MIDI_quarter_note;
+    public sealed class TimeSignatureEvent : MetaEvent
+    {
+        public readonly byte numerator;
+        public readonly byte denominator;
+        public readonly byte metronome_pulse;
+        public readonly byte number_of_32nd_notes_per_MIDI_quarter_note;
 
-		public TimeSignatureEvent (int delta_time, byte numerator, byte denominator, byte metronome_pulse, byte number_of_32nd_notes_per_MIDI_quarter_note) : base(delta_time, 0x58)
-		{
-			this.numerator = numerator;
-			this.denominator = denominator;
-			this.metronome_pulse = metronome_pulse;
-			this.number_of_32nd_notes_per_MIDI_quarter_note = number_of_32nd_notes_per_MIDI_quarter_note;
-		}
-		
-		public override string ToString ()
-		{
-			return "TimeSignatureEvent(" + base.ToString () + ", numerator: " + numerator + ", denominator: " + denominator + ", metronome_pulse: " + metronome_pulse + ", number_of_32nd_notes_per_MIDI_quarter_note: " + number_of_32nd_notes_per_MIDI_quarter_note + ")";
-		}
-	}
+        public TimeSignatureEvent(int delta_time, byte numerator, byte denominator, byte metronome_pulse, byte number_of_32nd_notes_per_MIDI_quarter_note)
+            : base(delta_time, 0x58)
+        {
+            this.numerator = numerator;
+            this.denominator = denominator;
+            this.metronome_pulse = metronome_pulse;
+            this.number_of_32nd_notes_per_MIDI_quarter_note = number_of_32nd_notes_per_MIDI_quarter_note;
+        }
+
+        public override string ToString()
+        {
+            return "TimeSignatureEvent(" + base.ToString() + ", numerator: " + numerator + ", denominator: " + denominator + ", metronome_pulse: " + metronome_pulse + ", number_of_32nd_notes_per_MIDI_quarter_note: " + number_of_32nd_notes_per_MIDI_quarter_note + ")";
+        }
+    }
 }
 

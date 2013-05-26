@@ -27,23 +27,23 @@ using System.Linq;
 
 namespace Midi
 {
-	public class MidiData
-	{
-		public readonly HeaderChunk header;
-		public readonly Tracks tracks;
+    public class MidiData
+    {
+        public readonly HeaderChunk header;
+        public readonly Tracks tracks;
 
-		public MidiData (HeaderChunk header, TracksIn tracks)
-		{
-			this.header = header;
-			this.tracks = tracks.ToList ();
-		}
+        public MidiData(HeaderChunk header, TracksIn tracks)
+        {
+            this.header = header;
+            this.tracks = tracks.ToList();
+        }
 
-		public override string ToString ()
-		{
-			string tracks_string = tracks.Aggregate ("", (string a, TrackChunk b) => a + b + ", ");
-			tracks_string = tracks_string.Remove (tracks_string.Length - 2);
+        public override string ToString()
+        {
+            string tracks_string = tracks.Aggregate("", (string a, TrackChunk b) => a + b + ", ");
+            tracks_string = tracks_string.Remove(tracks_string.Length - 2);
 
-			return "MidiFile(header: " + header + ", tracks: [" + tracks_string + "])";
-		}
-	}
+            return "MidiFile(header: " + header + ", tracks: [" + tracks_string + "])";
+        }
+    }
 }

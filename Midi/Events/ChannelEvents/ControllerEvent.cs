@@ -22,21 +22,22 @@ THE SOFTWARE.
 
 namespace Midi.Events.ChannelEvents
 {
-	public sealed class ControllerEvent : ChannelEvent
-	{
-		public readonly byte controller_number;
-		public readonly byte controller_value;
+    public sealed class ControllerEvent : ChannelEvent
+    {
+        public readonly byte controller_number;
+        public readonly byte controller_value;
 
-		public ControllerEvent (int delta_time, byte midi_channel, byte controller_number, byte controller_value) : base (delta_time, 0xB0, midi_channel)
-		{
-			this.controller_number = controller_number;
-			this.controller_value = controller_value;
-		}
-		
-		public override string ToString ()
-		{
-			return "ControllerEvent(" + base.ToString () + ", controller_number: " + controller_number + ", controller_value: " + controller_value + ")";
-		}
-	}
+        public ControllerEvent(int delta_time, byte midi_channel, byte controller_number, byte controller_value)
+            : base(delta_time, 0xB0, midi_channel)
+        {
+            this.controller_number = controller_number;
+            this.controller_value = controller_value;
+        }
+
+        public override string ToString()
+        {
+            return "ControllerEvent(" + base.ToString() + ", controller_number: " + controller_number + ", controller_value: " + controller_value + ")";
+        }
+    }
 }
 

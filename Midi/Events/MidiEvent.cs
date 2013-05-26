@@ -22,20 +22,20 @@ THE SOFTWARE.
 
 namespace Midi.Events
 {
-	public abstract class MidiEvent
-	{
-		public readonly int delta_time;
-		public readonly byte event_type;
+    public abstract class MidiEvent
+    {
+        public readonly int delta_time;
+        public readonly byte event_type;
 
-		public MidiEvent (int delta_time, byte event_type)
-		{
-			this.delta_time = delta_time;
-			this.event_type = event_type;
-		}
+        public MidiEvent(int delta_time, byte event_type)
+        {
+            this.delta_time = delta_time;
+            this.event_type = event_type;
+        }
 
-		public override string ToString ()
-		{
-			return "MidiEvent(delta_time: " + delta_time + ", event_type: " + event_type + ")";
-		}
-	}
+        public override string ToString()
+        {
+            return "MidiEvent(delta_time: " + delta_time + ", event_type: " + event_type + ")";
+        }
+    }
 }

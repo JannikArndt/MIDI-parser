@@ -22,20 +22,21 @@ THE SOFTWARE.
 
 namespace Midi.Chunks
 {
-	public sealed class HeaderChunk : Chunk
-	{
-		public readonly ushort format_type;
-		public readonly ushort time_division;
+    public sealed class HeaderChunk : Chunk
+    {
+        public readonly ushort format_type;
+        public readonly ushort time_division;
 
-		public HeaderChunk (ushort format_type, ushort time_division) : base("MThd")
-		{
-			this.format_type = format_type;
-			this.time_division = time_division;
-		}
+        public HeaderChunk(ushort format_type, ushort time_division)
+            : base("MThd")
+        {
+            this.format_type = format_type;
+            this.time_division = time_division;
+        }
 
-		override public string ToString ()
-		{
-			return "HeaderChunk(" + base.ToString () + ", format_type: " + format_type + ", time_division: " + time_division + ")";
-		}
-	}
+        override public string ToString()
+        {
+            return "HeaderChunk(" + base.ToString() + ", format_type: " + format_type + ", time_division: " + time_division + ")";
+        }
+    }
 }

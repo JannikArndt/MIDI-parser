@@ -22,19 +22,20 @@ THE SOFTWARE.
 
 namespace Midi.Events.ChannelEvents
 {
-	public sealed class ChannelAftertouchEvent : ChannelEvent
-	{
-		public readonly byte aftertouch_value;
+    public sealed class ChannelAftertouchEvent : ChannelEvent
+    {
+        public readonly byte aftertouch_value;
 
-		public ChannelAftertouchEvent (int delta_time, byte midi_channel, byte aftertouch_value) : base (delta_time, 0xD0, midi_channel)
-		{
-			this.aftertouch_value = aftertouch_value;
-		}
-		
-		public override string ToString ()
-		{
-			return "ChannelAftertouchEvent(" + base.ToString () + ", aftertouch_value: " + aftertouch_value + ")";
-		}
-	}
+        public ChannelAftertouchEvent(int delta_time, byte midi_channel, byte aftertouch_value)
+            : base(delta_time, 0xD0, midi_channel)
+        {
+            this.aftertouch_value = aftertouch_value;
+        }
+
+        public override string ToString()
+        {
+            return "ChannelAftertouchEvent(" + base.ToString() + ", aftertouch_value: " + aftertouch_value + ")";
+        }
+    }
 }
 

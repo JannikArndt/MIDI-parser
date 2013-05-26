@@ -22,19 +22,20 @@ THE SOFTWARE.
 
 namespace Midi.Events.MetaEvents
 {
-	public sealed class SequenceNumberEvent : MetaEvent
-	{
-		public readonly ushort number;
+    public sealed class SequenceNumberEvent : MetaEvent
+    {
+        public readonly ushort number;
 
-		public SequenceNumberEvent (ushort number) : base(0, 0x00)
-		{
-			this.number = number;
-		}
-		
-		public override string ToString ()
-		{
-			return "SequenceNumberEvent(" + base.ToString () + ", number: " + number + ")";
-		}
-	}
+        public SequenceNumberEvent(ushort number)
+            : base(0, 0x00)
+        {
+            this.number = number;
+        }
+
+        public override string ToString()
+        {
+            return "SequenceNumberEvent(" + base.ToString() + ", number: " + number + ")";
+        }
+    }
 }
 

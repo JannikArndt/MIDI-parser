@@ -22,19 +22,20 @@ THE SOFTWARE.
 
 namespace Midi.Events.MetaEvents
 {
-	public sealed class CopyrightNoticeEvent : MetaEvent
-	{
-		public readonly string notice;
+    public sealed class CopyrightNoticeEvent : MetaEvent
+    {
+        public readonly string notice;
 
-		public CopyrightNoticeEvent (string notice) : base(0, 0x02)
-		{
-			this.notice = notice;
-		}
-		
-		public override string ToString ()
-		{
-			return "CopyrightNoticeEvent(" + base.ToString () + ", notice: " + notice + ")";
-		}
-	}
+        public CopyrightNoticeEvent(string notice)
+            : base(0, 0x02)
+        {
+            this.notice = notice;
+        }
+
+        public override string ToString()
+        {
+            return "CopyrightNoticeEvent(" + base.ToString() + ", notice: " + notice + ")";
+        }
+    }
 }
 

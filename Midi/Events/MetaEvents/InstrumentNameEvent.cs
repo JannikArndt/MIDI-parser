@@ -22,19 +22,20 @@ THE SOFTWARE.
 
 namespace Midi.Events.MetaEvents
 {
-	public sealed class InstrumentNameEvent : MetaEvent
-	{
-		public readonly string name;
+    public sealed class InstrumentNameEvent : MetaEvent
+    {
+        public readonly string name;
 
-		public InstrumentNameEvent (int delta_time, string name) : base(delta_time, 0x04)
-		{
-			this.name = name;
-		}
-		
-		public override string ToString ()
-		{
-			return "InstrumentNameEvent(" + base.ToString () + ", name: " + name + ")";
-		}
-	}
+        public InstrumentNameEvent(int delta_time, string name)
+            : base(delta_time, 0x04)
+        {
+            this.name = name;
+        }
+
+        public override string ToString()
+        {
+            return "InstrumentNameEvent(" + base.ToString() + ", name: " + name + ")";
+        }
+    }
 }
 

@@ -22,18 +22,19 @@ THE SOFTWARE.
 
 namespace Midi.Events.MetaEvents
 {
-	public abstract class MetaEvent : MidiEvent
-	{
-		public readonly byte meta_event_type;
+    public abstract class MetaEvent : MidiEvent
+    {
+        public readonly byte meta_event_type;
 
-		public MetaEvent (int delta_time, byte meta_event_type) : base(delta_time, 0xFF)
-		{
-			this.meta_event_type = meta_event_type;
-		}
-		
-		public override string ToString ()
-		{
-			return "MetaEvent(" + base.ToString () + ", meta_event_type: " + meta_event_type + ")";
-		}
-	}
+        public MetaEvent(int delta_time, byte meta_event_type)
+            : base(delta_time, 0xFF)
+        {
+            this.meta_event_type = meta_event_type;
+        }
+
+        public override string ToString()
+        {
+            return "MetaEvent(" + base.ToString() + ", meta_event_type: " + meta_event_type + ")";
+        }
+    }
 }

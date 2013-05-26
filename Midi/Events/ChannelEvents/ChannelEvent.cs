@@ -22,18 +22,19 @@ THE SOFTWARE.
 
 namespace Midi.Events.ChannelEvents
 {
-	public abstract class ChannelEvent : MidiEvent
-	{
-		public readonly byte midi_channel;
+    public abstract class ChannelEvent : MidiEvent
+    {
+        public readonly byte midi_channel;
 
-		public ChannelEvent (int delta_time, byte event_type, byte midi_channel) : base(delta_time, event_type)
-		{
-			this.midi_channel = midi_channel;
-		}
-		
-		public override string ToString ()
-		{
-			return "ChannelEvent(" + base.ToString () + ", midi_channel: " + midi_channel + ")";
-		}
-	}
+        public ChannelEvent(int delta_time, byte event_type, byte midi_channel)
+            : base(delta_time, event_type)
+        {
+            this.midi_channel = midi_channel;
+        }
+
+        public override string ToString()
+        {
+            return "ChannelEvent(" + base.ToString() + ", midi_channel: " + midi_channel + ")";
+        }
+    }
 }

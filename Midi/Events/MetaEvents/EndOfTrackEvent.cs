@@ -22,16 +22,17 @@ THE SOFTWARE.
 
 namespace Midi.Events.MetaEvents
 {
-	public sealed class EndOfTrackEvent : MetaEvent
-	{
-		public EndOfTrackEvent (int delta_time) : base(delta_time, 0x2F)
-		{
-		}
-		
-		public override string ToString ()
-		{
-			return "EndOfTrackEvent(" + base.ToString () + ")";
-		}
-	}
+    public sealed class EndOfTrackEvent : MetaEvent
+    {
+        public EndOfTrackEvent(int delta_time)
+            : base(delta_time, 0x2F)
+        {
+        }
+
+        public override string ToString()
+        {
+            return "EndOfTrackEvent(" + base.ToString() + ")";
+        }
+    }
 }
 

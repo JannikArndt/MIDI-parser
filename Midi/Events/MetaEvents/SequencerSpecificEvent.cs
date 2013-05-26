@@ -23,19 +23,20 @@ using Data = System.Collections.Generic.IEnumerable<byte>;
 
 namespace Midi.Events.MetaEvents
 {
-	public sealed class SequencerSpecificEvent : MetaEvent
-	{
-		public readonly Data data;
+    public sealed class SequencerSpecificEvent : MetaEvent
+    {
+        public readonly Data data;
 
-		public SequencerSpecificEvent (int delta_time, Data data) : base(delta_time, 0x7F)
-		{
-			this.data = data;
-		}
-		
-		public override string ToString ()
-		{
-			return "SequencerSpecificEvent(" + base.ToString () + ", data: " + data + ")";
-		}
-	}
+        public SequencerSpecificEvent(int delta_time, Data data)
+            : base(delta_time, 0x7F)
+        {
+            this.data = data;
+        }
+
+        public override string ToString()
+        {
+            return "SequencerSpecificEvent(" + base.ToString() + ", data: " + data + ")";
+        }
+    }
 }
 

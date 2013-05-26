@@ -22,19 +22,20 @@ THE SOFTWARE.
 
 namespace Midi.Events.ChannelEvents
 {
-	public sealed class ProgramChangeEvent : ChannelEvent
-	{
-		public readonly byte program_number;
+    public sealed class ProgramChangeEvent : ChannelEvent
+    {
+        public readonly byte program_number;
 
-		public ProgramChangeEvent (int delta_time, byte midi_channel, byte program_number) : base (delta_time, 0xC0, midi_channel)
-		{
-			this.program_number = program_number;
-		}
-		
-		public override string ToString ()
-		{
-			return "ProgramChangeEvent(" + base.ToString () + ", program_number: " + program_number + ")";
-		}
-	}
+        public ProgramChangeEvent(int delta_time, byte midi_channel, byte program_number)
+            : base(delta_time, 0xC0, midi_channel)
+        {
+            this.program_number = program_number;
+        }
+
+        public override string ToString()
+        {
+            return "ProgramChangeEvent(" + base.ToString() + ", program_number: " + program_number + ")";
+        }
+    }
 }
 
