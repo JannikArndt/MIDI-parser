@@ -34,8 +34,10 @@ using TrackEventsList = System.Collections.Generic.List<Midi.Events.MidiEvent>;
 using ByteList = System.Collections.Generic.List<byte>;
 using ByteEnumerable = System.Collections.Generic.IEnumerable<byte>;
 using MidiEvent = Midi.Events.MidiEvent;
-using MIDIEvent_Length_Tuple = System.Tuple<Midi.Events.MidiEvent, int, byte>;
+using MIDIEvent_Length_Tuple = System.Tuple<Midi.Util.Option.Option<Midi.Events.MidiEvent>, int, byte>;
 using Tuple = System.Tuple;
+using SomeMidiEvent = Midi.Util.Option.Some<Midi.Events.MidiEvent>;
+using NoMidiEvent = Midi.Util.Option.None<Midi.Events.MidiEvent>;
 using BoolList = System.Collections.Generic.List<bool>;
 using BoolEnumerable = System.Collections.Generic.IEnumerable<bool>;
 using Math = System.Math;
@@ -98,7 +100,12 @@ namespace Midi
                 i += tuple.Item2;
                 last_midi_channel = tuple.Item3;
 
-                yield return tuple.Item1;
+                switch (tuple.Item1.GetType() == typeof(SomeMidiEvent))
+                {
+                    case true:
+                        yield return ((SomeMidiEvent)tuple.Item1).value;
+                        break;
+                }
             }
 
             yield break;
@@ -304,7 +311,13 @@ namespace Midi
                 }
             }
 
-            return new MIDIEvent_Length_Tuple(midi_event, i - start_index, last_midi_channel);
+            switch (midi_event != null)
+            {
+                case true:
+                    return new MIDIEvent_Length_Tuple(new SomeMidiEvent(midi_event), i - start_index, last_midi_channel);
+            }
+
+            return new MIDIEvent_Length_Tuple(new NoMidiEvent(), i - start_index, last_midi_channel);
         }
 
         private static BoolEnumerable convert_byte_to_bools(byte byte_in)

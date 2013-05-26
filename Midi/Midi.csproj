@@ -65,9 +65,13 @@
     <Compile Include="Events\MetaEvents\KeySignatureEvent.cs" />
     <Compile Include="Events\MetaEvents\SequencerSpecificEvent.cs" />
     <Compile Include="Events\MetaEvents\MetaEvent.cs" />
+    <Compile Include="Util\Option\None.cs" />
+    <Compile Include="Util\Option\Option.cs" />
+    <Compile Include="Util\Option\Some.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
 </Project>
