@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 namespace Midi.Util.Option
 {
-    class None<T> : Option<T>
+    sealed class None<T> : Option<T>
     {
         public None() : base() { }
     }

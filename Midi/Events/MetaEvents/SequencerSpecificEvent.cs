@@ -20,6 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 using Data = System.Collections.Generic.IEnumerable<byte>;
+using System.Linq;
 
 namespace Midi.Events.MetaEvents
 {
@@ -30,7 +31,7 @@ namespace Midi.Events.MetaEvents
         public SequencerSpecificEvent(int delta_time, Data data)
             : base(delta_time, 0x7F)
         {
-            this.data = data;
+            this.data = data.ToList().AsReadOnly();
         }
 
         public override string ToString()

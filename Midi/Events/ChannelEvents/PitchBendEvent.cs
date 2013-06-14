@@ -24,14 +24,24 @@ namespace Midi.Events.ChannelEvents
 {
     public sealed class PitchBendEvent : ChannelEvent
     {
-        public readonly byte pitch_value_LSB;
-        public readonly byte pitch_value_MSB;
+        public byte pitch_value_LSB
+        {
+            get
+            {
+                return this.parameter_1;
+            }
+        }
+        public byte pitch_value_MSB
+        {
+            get
+            {
+                return this.parameter_2;
+            }
+        }
 
         public PitchBendEvent(int delta_time, byte midi_channel, byte pitch_value_LSB, byte pitch_value_MSB)
-            : base(delta_time, 0xE0, midi_channel)
+            : base(delta_time, 0xE0, midi_channel, pitch_value_LSB, pitch_value_MSB)
         {
-            this.pitch_value_LSB = pitch_value_LSB;
-            this.pitch_value_MSB = pitch_value_MSB;
         }
 
         public override string ToString()

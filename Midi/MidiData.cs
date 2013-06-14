@@ -30,17 +30,17 @@ namespace Midi
     public class MidiData
     {
         public readonly HeaderChunk header;
-        public readonly Tracks tracks;
+        public readonly TracksIn tracks;
 
         public MidiData(HeaderChunk header, TracksIn tracks)
         {
             this.header = header;
-            this.tracks = tracks.ToList();
+            this.tracks = tracks.ToList().AsReadOnly();
         }
 
         public override string ToString()
         {
-            string tracks_string = tracks.Aggregate("", (string a, TrackChunk b) => a + b + ", ");
+            var tracks_string = tracks.Aggregate("", (string a, TrackChunk b) => a + b + ", ");
             tracks_string = tracks_string.Remove(tracks_string.Length - 2);
 
             return "MidiFile(header: " + header + ", tracks: [" + tracks_string + "])";

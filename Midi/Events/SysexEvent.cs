@@ -20,6 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 using Data = System.Collections.Generic.IEnumerable<byte>;
+using System.Linq;
 
 namespace Midi.Events
 {
@@ -36,7 +37,7 @@ namespace Midi.Events
                     throw new System.ArgumentOutOfRangeException();
             }
 
-            this.data = data;
+            this.data = data.ToList().AsReadOnly();
         }
 
         public override string ToString()

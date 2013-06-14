@@ -24,14 +24,24 @@ namespace Midi.Events.ChannelEvents
 {
     public sealed class NoteAftertouchEvent : ChannelEvent
     {
-        public readonly byte note_number;
-        public readonly byte aftertouch_value;
+        public byte note_number
+        {
+            get
+            {
+                return this.parameter_1;
+            }
+        }
+        public byte aftertouch_value
+        {
+            get
+            {
+                return this.parameter_2;
+            }
+        }
 
         public NoteAftertouchEvent(int delta_time, byte midi_channel, byte note_number, byte aftertouch_value)
-            : base(delta_time, 0xA0, midi_channel)
+            : base(delta_time, 0xA0, midi_channel, note_number, aftertouch_value)
         {
-            this.note_number = note_number;
-            this.aftertouch_value = aftertouch_value;
         }
 
         public override string ToString()

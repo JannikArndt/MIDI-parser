@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 namespace Midi.Util.Option
 {
-    class Some<T> : Option<T>
+    sealed class Some<T> : Option<T>
     {
         public readonly T value;
 

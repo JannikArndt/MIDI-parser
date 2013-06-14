@@ -24,14 +24,24 @@ namespace Midi.Events.ChannelEvents
 {
     public sealed class ControllerEvent : ChannelEvent
     {
-        public readonly byte controller_number;
-        public readonly byte controller_value;
+        public byte controller_number
+        {
+            get
+            {
+                return this.parameter_1;
+            }
+        }
+        public byte controller_value
+        {
+            get
+            {
+                return this.parameter_2;
+            }
+        }
 
         public ControllerEvent(int delta_time, byte midi_channel, byte controller_number, byte controller_value)
-            : base(delta_time, 0xB0, midi_channel)
+            : base(delta_time, 0xB0, midi_channel, controller_number, controller_value)
         {
-            this.controller_number = controller_number;
-            this.controller_value = controller_value;
         }
 
         public override string ToString()

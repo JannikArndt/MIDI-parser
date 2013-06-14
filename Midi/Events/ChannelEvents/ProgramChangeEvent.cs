@@ -24,12 +24,17 @@ namespace Midi.Events.ChannelEvents
 {
     public sealed class ProgramChangeEvent : ChannelEvent
     {
-        public readonly byte program_number;
+        public byte program_number
+        {
+            get
+            {
+                return this.parameter_1;
+            }
+        }
 
         public ProgramChangeEvent(int delta_time, byte midi_channel, byte program_number)
-            : base(delta_time, 0xC0, midi_channel)
+            : base(delta_time, 0xC0, midi_channel, program_number, 0x00)
         {
-            this.program_number = program_number;
         }
 
         public override string ToString()

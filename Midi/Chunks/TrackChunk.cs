@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 using TrackEventsIEnumerable = System.Collections.Generic.IEnumerable<Midi.Events.MidiEvent>;
-using TrackEventsList = System.Collections.Generic.List<Midi.Events.MidiEvent>;
+using TrackEvents = System.Collections.ObjectModel.ReadOnlyCollection<Midi.Events.MidiEvent>;
 using System.Linq;
 using MidiEvent = Midi.Events.MidiEvent;
 
@@ -35,10 +35,10 @@ namespace Midi.Chunks
         {
             get
             {
-                switch (_events.GetType() == typeof(TrackEventsList))
+                switch (_events.GetType() == typeof(TrackEvents))
                 {
                     case false:
-                        _events = _events.ToList();
+                        _events = _events.ToList().AsReadOnly();
                         break;
                 }
                 return _events;
@@ -54,7 +54,7 @@ namespace Midi.Chunks
 
         override public string ToString()
         {
-            string events_string = events.Aggregate("", (string a, MidiEvent b) => a + b + ", ");
+            var events_string = events.Aggregate("", (string a, MidiEvent b) => a + b + ", ");
             events_string = events_string.Remove(events_string.Length - 2);
 
             return "TrackChunk(" + base.ToString() + ", events: [" + events_string + "])";
