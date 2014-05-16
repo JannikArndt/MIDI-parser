@@ -1,0 +1,6 @@
+Z:\Code\MIDI-parser\Midi\bin\Release\Midi.dll
+Z:\Code\MIDI-parser\Midi\obj\x86\Release\Midi.csprojResolveAssemblyReference.cache
+Z:\Code\MIDI-parser\Midi\obj\x86\Release\Midi.dll
+Z:\Code\Musicista-CS\Musicista\Midi\obj\x86\Release\Midi.csprojResolveAssemblyReference.cache
+Z:\Code\Musicista-CS\Musicista\Midi\obj\x86\Release\Midi.dll
+Z:\Code\Musicista-CS\Musicista\Midi\bin\Release\Midi.dll

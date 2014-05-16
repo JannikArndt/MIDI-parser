@@ -24,24 +24,19 @@ namespace Midi.Events.ChannelEvents
 {
     public sealed class NoteOnEvent : ChannelEvent
     {
-        public byte note_number
-        {
-            get
-            {
-                return this.parameter_1;
-            }
-        }
-        public byte velocity
-        {
-            get
-            {
-                return this.parameter_2;
-            }
-        }
-
         public NoteOnEvent(int delta_time, byte midi_channel, byte note_number, byte velocity)
             : base(delta_time, 0x90, midi_channel, note_number, velocity)
         {
+        }
+
+        public byte note_number
+        {
+            get { return parameter_1; }
+        }
+
+        public byte velocity
+        {
+            get { return parameter_2; }
         }
 
         public override string ToString()
@@ -50,4 +45,3 @@ namespace Midi.Events.ChannelEvents
         }
     }
 }
-

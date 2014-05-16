@@ -24,18 +24,18 @@ namespace Midi.Events
 {
     public abstract class MidiEvent
     {
-        public readonly int delta_time;
-        public readonly byte event_type;
+        public readonly int DeltaTime;
+        public readonly byte EventType;
 
-        public MidiEvent(int delta_time, byte event_type)
+        protected MidiEvent(int deltaTime, byte eventType)
         {
-            this.delta_time = delta_time;
-            this.event_type = event_type;
+            DeltaTime = deltaTime;
+            EventType = eventType;
         }
 
         public override string ToString()
         {
-            return "MidiEvent(delta_time: " + delta_time + ", event_type: " + event_type + ")";
+            return "MidiEvent(delta_time: " + DeltaTime + ", event_type: " + EventType + ")";
         }
     }
 }

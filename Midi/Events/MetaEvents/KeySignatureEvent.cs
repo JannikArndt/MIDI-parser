@@ -20,6 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+using System;
+
 namespace Midi.Events.MetaEvents
 {
     public enum Scales
@@ -30,19 +32,18 @@ namespace Midi.Events.MetaEvents
 
     public sealed class KeySignatureEvent : MetaEvent
     {
-        public readonly byte scale;
         public readonly short key;
+        public readonly byte scale;
 
         public KeySignatureEvent(int delta_time, byte key, byte scale)
             : base(delta_time, 0x59)
         {
-
             /*if (key < -7 || key > 7) {
                 throw new System.ArgumentOutOfRangeException();
             }*/
             if (scale < 0 || scale > 1)
             {
-                throw new System.ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException();
             }
             this.key = key;
             this.scale = scale;
@@ -54,4 +55,3 @@ namespace Midi.Events.MetaEvents
         }
     }
 }
-

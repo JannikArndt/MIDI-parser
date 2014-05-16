@@ -19,31 +19,30 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-using TracksIn = System.Collections.Generic.IEnumerable<Midi.Chunks.TrackChunk>;
-using Tracks = System.Collections.Generic.List<Midi.Chunks.TrackChunk>;
-using HeaderChunk = Midi.Chunks.HeaderChunk;
-using TrackChunk = Midi.Chunks.TrackChunk;
+
+using Midi.Chunks;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Midi
 {
     public class MidiData
     {
-        public readonly HeaderChunk header;
-        public readonly TracksIn tracks;
+        public readonly HeaderChunk Header;
+        public readonly List<TrackChunk> Tracks;
 
-        public MidiData(HeaderChunk header, TracksIn tracks)
+        public MidiData(HeaderChunk header, List<TrackChunk> tracks)
         {
-            this.header = header;
-            this.tracks = tracks.ToList().AsReadOnly();
+            Header = header;
+            Tracks = tracks;
         }
 
         public override string ToString()
         {
-            var tracks_string = tracks.Aggregate("", (string a, TrackChunk b) => a + b + ", ");
-            tracks_string = tracks_string.Remove(tracks_string.Length - 2);
+            var tracksString = Tracks.Aggregate("", (a, b) => a + b + ", ");
+            tracksString = tracksString.Remove(tracksString.Length - 2);
 
-            return "MidiFile(header: " + header + ", tracks: [" + tracks_string + "])";
+            return "MidiFile(header: " + Header + ", tracks: [" + tracksString + "])";
         }
     }
 }

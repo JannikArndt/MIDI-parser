@@ -24,17 +24,14 @@ namespace Midi.Events.ChannelEvents
 {
     public sealed class ProgramChangeEvent : ChannelEvent
     {
-        public byte program_number
-        {
-            get
-            {
-                return this.parameter_1;
-            }
-        }
-
         public ProgramChangeEvent(int delta_time, byte midi_channel, byte program_number)
             : base(delta_time, 0xC0, midi_channel, program_number, 0x00)
         {
+        }
+
+        public byte program_number
+        {
+            get { return parameter_1; }
         }
 
         public override string ToString()
@@ -43,4 +40,3 @@ namespace Midi.Events.ChannelEvents
         }
     }
 }
-

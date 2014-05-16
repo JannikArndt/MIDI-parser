@@ -24,16 +24,15 @@ namespace Midi.Events.ChannelEvents
 {
     public sealed class ChannelAftertouchEvent : ChannelEvent
     {
-        public byte aftertouch_value
+        public ChannelAftertouchEvent(int delta_time, byte midi_channel, byte aftertouch_value)
+            : base(delta_time, 0xD0, midi_channel, aftertouch_value, 0x00)
         {
-            get
-            {
-                return this.parameter_1;
-            }
         }
 
-        public ChannelAftertouchEvent(int delta_time, byte midi_channel, byte aftertouch_value)
-            : base(delta_time, 0xD0, midi_channel, aftertouch_value, 0x00) { }
+        public byte aftertouch_value
+        {
+            get { return parameter_1; }
+        }
 
         public override string ToString()
         {
@@ -41,4 +40,3 @@ namespace Midi.Events.ChannelEvents
         }
     }
 }
-

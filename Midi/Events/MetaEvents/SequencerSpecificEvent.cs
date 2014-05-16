@@ -19,8 +19,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-using Data = System.Collections.Generic.IEnumerable<byte>;
+
 using System.Linq;
+using Data = System.Collections.Generic.IEnumerable<byte>;
 
 namespace Midi.Events.MetaEvents
 {
@@ -40,4 +41,3 @@ namespace Midi.Events.MetaEvents
         }
     }
 }
-

@@ -35,4 +35,3 @@ namespace Midi.Events.MetaEvents
         }
     }
 }
-

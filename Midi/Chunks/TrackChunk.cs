@@ -19,45 +19,29 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-using TrackEventsIEnumerable = System.Collections.Generic.IEnumerable<Midi.Events.MidiEvent>;
-using TrackEvents = System.Collections.ObjectModel.ReadOnlyCollection<Midi.Events.MidiEvent>;
+
+using Midi.Events;
+using System.Collections.Generic;
 using System.Linq;
-using MidiEvent = Midi.Events.MidiEvent;
 
 namespace Midi.Chunks
 {
-    public sealed class TrackChunk : Chunk
+    public class TrackChunk : Chunk
     {
-        // Lazy loading mechanism
-        private TrackEventsIEnumerable _events;
-
-        public TrackEventsIEnumerable events
-        {
-            get
-            {
-                switch (_events.GetType() == typeof(TrackEvents))
-                {
-                    case false:
-                        _events = _events.ToList().AsReadOnly();
-                        break;
-                }
-                return _events;
-            }
-            private set { }
-        }
-
-        public TrackChunk(TrackEventsIEnumerable events)
+        public TrackChunk(List<MidiEvent> events)
             : base("MTrk")
         {
-            this._events = events;
+            Events = events;
         }
 
-        override public string ToString()
-        {
-            var events_string = events.Aggregate("", (string a, MidiEvent b) => a + b + ", ");
-            events_string = events_string.Remove(events_string.Length - 2);
+        public List<MidiEvent> Events { get; set; }
 
-            return "TrackChunk(" + base.ToString() + ", events: [" + events_string + "])";
+        public override string ToString()
+        {
+            var eventsString = Events.Aggregate("", (a, b) => a + b + ", ");
+            eventsString = eventsString.Remove(eventsString.Length - 2);
+
+            return "TrackChunk(" + base.ToString() + ", events: [" + eventsString + "])";
         }
     }
 }

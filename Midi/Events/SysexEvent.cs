@@ -19,8 +19,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-using Data = System.Collections.Generic.IEnumerable<byte>;
+
+using System;
 using System.Linq;
+using Data = System.Collections.Generic.IEnumerable<byte>;
 
 namespace Midi.Events
 {
@@ -34,7 +36,7 @@ namespace Midi.Events
             switch (event_type == 0xF0 || event_type == 0xF7)
             {
                 case false:
-                    throw new System.ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException();
             }
 
             this.data = data.ToList().AsReadOnly();

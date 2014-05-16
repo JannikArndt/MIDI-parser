@@ -24,16 +24,16 @@ namespace Midi.Chunks
 {
     public abstract class Chunk
     {
-        public readonly string chunk_ID;
+        public string ChunkId;
 
-        public Chunk(string chunk_ID)
+        public Chunk(string chunkId)
         {
-            this.chunk_ID = chunk_ID;
+            ChunkId = chunkId;
         }
 
-        override public string ToString()
+        public override string ToString()
         {
-            return "Chunk(chunk_ID: " + chunk_ID + ")";
+            return "Chunk(chunk_ID: " + ChunkId + ")";
         }
     }
 }

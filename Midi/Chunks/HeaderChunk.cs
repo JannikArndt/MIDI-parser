@@ -24,19 +24,23 @@ namespace Midi.Chunks
 {
     public sealed class HeaderChunk : Chunk
     {
-        public readonly ushort format_type;
-        public readonly ushort time_division;
-
-        public HeaderChunk(ushort format_type, ushort time_division)
-            : base("MThd")
+        public HeaderChunk() : base("MThd")
         {
-            this.format_type = format_type;
-            this.time_division = time_division;
         }
 
-        override public string ToString()
+        public HeaderChunk(ushort formatType, ushort timeDivision)
+            : base("MThd")
         {
-            return "HeaderChunk(" + base.ToString() + ", format_type: " + format_type + ", time_division: " + time_division + ")";
+            FormatType = formatType;
+            TimeDivision = timeDivision;
+        }
+
+        public ushort FormatType { get; set; }
+        public ushort TimeDivision { get; set; }
+
+        public override string ToString()
+        {
+            return "HeaderChunk(" + base.ToString() + ", format_type: " + FormatType + ", time_division: " + TimeDivision + ")";
         }
     }
 }

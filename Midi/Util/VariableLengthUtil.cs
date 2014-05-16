@@ -19,12 +19,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
+
+using System;
 using System.Linq;
+using BoolEnumerable = System.Collections.Generic.IEnumerable<bool>;
 using ByteEnumerable = System.Collections.Generic.IEnumerable<byte>;
 using ByteList = System.Collections.Generic.List<byte>;
-using BoolList = System.Collections.Generic.List<bool>;
-using BoolEnumerable = System.Collections.Generic.IEnumerable<bool>;
-using System;
 
 namespace Midi.Util
 {
@@ -39,52 +39,52 @@ namespace Midi.Util
                 switch (hex_in)
                 {
                     case 0x00:
-                        temp = new bool[] { false, false, false, false };
+                        temp = new[] {false, false, false, false};
                         break;
                     case 0x01:
-                        temp = new bool[] { false, false, false, true };
+                        temp = new[] {false, false, false, true};
                         break;
                     case 0x02:
-                        temp = new bool[] { false, false, true, false };
+                        temp = new[] {false, false, true, false};
                         break;
                     case 0x03:
-                        temp = new bool[] { false, false, true, true };
+                        temp = new[] {false, false, true, true};
                         break;
                     case 0x04:
-                        temp = new bool[] { false, true, false, false };
+                        temp = new[] {false, true, false, false};
                         break;
                     case 0x05:
-                        temp = new bool[] { false, true, false, true };
+                        temp = new[] {false, true, false, true};
                         break;
                     case 0x06:
-                        temp = new bool[] { false, true, true, false };
+                        temp = new[] {false, true, true, false};
                         break;
                     case 0x07:
-                        temp = new bool[] { false, true, true, true };
+                        temp = new[] {false, true, true, true};
                         break;
                     case 0x08:
-                        temp = new bool[] { true, false, false, false };
+                        temp = new[] {true, false, false, false};
                         break;
                     case 0x09:
-                        temp = new bool[] { true, false, false, true };
+                        temp = new[] {true, false, false, true};
                         break;
                     case 0x0A:
-                        temp = new bool[] { true, false, true, false };
+                        temp = new[] {true, false, true, false};
                         break;
                     case 0x0B:
-                        temp = new bool[] { true, false, true, true };
+                        temp = new[] {true, false, true, true};
                         break;
                     case 0x0C:
-                        temp = new bool[] { true, true, false, false };
+                        temp = new[] {true, true, false, false};
                         break;
                     case 0x0D:
-                        temp = new bool[] { true, true, false, true };
+                        temp = new[] {true, true, false, true};
                         break;
                     case 0x0E:
-                        temp = new bool[] { true, true, true, false };
+                        temp = new[] {true, true, true, false};
                         break;
                     case 0x0F:
-                        temp = new bool[] { true, true, true, true };
+                        temp = new[] {true, true, true, true};
                         break;
                 }
 
@@ -93,7 +93,7 @@ namespace Midi.Util
 
             /*return
                 convert_hex_to_bools((byte)((byte_in & 0xF0) >> 4));*/
-            return new byte[] { (byte)((byte_in & 0xF0) >> 4), (byte)(byte_in & 0x0F) }
+            return new[] {(byte) ((byte_in & 0xF0) >> 4), (byte) (byte_in & 0x0F)}
                 .SelectMany(bb => convert_hex_to_bools(bb));
         }
 
@@ -234,7 +234,7 @@ namespace Midi.Util
                 +
                  convert_bools_to_hex_L(bools_in.Skip(4).ToList())
                 );*/
-            var result1 = (byte)((convert_bools_to_hex(bools_in) << 4) + convert_bools_to_hex(bools_in.Skip(4).ToList()));
+            var result1 = (byte) ((convert_bools_to_hex(bools_in) << 4) + convert_bools_to_hex(bools_in.Skip(4).ToList()));
 
             return result1;
         }
@@ -251,11 +251,12 @@ namespace Midi.Util
             bits.InsertRange(0, new bool[bytes_list_in.Count]);
 
             // Partition the list of booleans into groups of eight convert them to bytes
-            var bytes_out = Enumerable.Range(0, bits.Count / 8).Select(i => convert_bools_to_byte(bits.Skip(i * 8).Take(8))).ToList().SkipWhile(b => b == 0x00).ToList();
+            var bytes_out =
+                Enumerable.Range(0, bits.Count/8).Select(i => convert_bools_to_byte(bits.Skip(i*8).Take(8))).ToList().SkipWhile(b => b == 0x00).ToList();
             switch (bytes_out.Count)
             {
                 case 0:
-                    bytes_out = new ByteList() { 0x00 };
+                    bytes_out = new ByteList {0x00};
                     break;
             }
             return bytes_out;
@@ -266,15 +267,14 @@ namespace Midi.Util
             var bytes_out = new ByteList();
             {
                 bytes_in = bytes_in.ToList();
-                var bits = new bool[bytes_in.Count() * 8];
+                var bits = new bool[bytes_in.Count()*8];
 
                 for (var i = 0; i < bytes_in.Count(); i += 1)
                 {
                     var b = bytes_in.ElementAt(i);
                     var bools = convert_byte_to_bools(b).Skip(1).ToArray();
-                    bits.CopyTo(bools, i * 7);
+                    bits.CopyTo(bools, i*7);
                 }
-
             }
 
             return bytes_out;

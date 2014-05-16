@@ -22,12 +22,11 @@ THE SOFTWARE.
 
 namespace Midi.Util.Option
 {
-    sealed class Some<T> : Option<T>
+    internal sealed class Some<T> : Option<T>
     {
         public readonly T value;
 
         public Some(T value)
-            : base()
         {
             this.value = value;
         }

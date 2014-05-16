@@ -20,6 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+using System;
+
 namespace Midi.Events.MetaEvents
 {
     public sealed class MIDIChannelPrefixEvent : MetaEvent
@@ -31,7 +33,7 @@ namespace Midi.Events.MetaEvents
         {
             if (channel < 0 || channel > 15)
             {
-                throw new System.ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException();
             }
             this.channel = channel;
         }
@@ -42,4 +44,3 @@ namespace Midi.Events.MetaEvents
         }
     }
 }
-

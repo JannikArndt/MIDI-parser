@@ -22,8 +22,7 @@ THE SOFTWARE.
 
 namespace Midi.Util.Option
 {
-    abstract class Option<T>
+    internal abstract class Option<T>
     {
-        public Option() { }
     }
 }

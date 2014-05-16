@@ -24,17 +24,17 @@ namespace Midi.Events.MetaEvents
 {
     public abstract class MetaEvent : MidiEvent
     {
-        public readonly byte meta_event_type;
+        public readonly byte MetaEventType;
 
-        public MetaEvent(int delta_time, byte meta_event_type)
-            : base(delta_time, 0xFF)
+        public MetaEvent(int deltaTime, byte metaEventType)
+            : base(deltaTime, 0xFF)
         {
-            this.meta_event_type = meta_event_type;
+            MetaEventType = metaEventType;
         }
 
         public override string ToString()
         {
-            return "MetaEvent(" + base.ToString() + ", meta_event_type: " + meta_event_type + ")";
+            return "MetaEvent(" + base.ToString() + ", meta_event_type: " + MetaEventType + ")";
         }
     }
 }
